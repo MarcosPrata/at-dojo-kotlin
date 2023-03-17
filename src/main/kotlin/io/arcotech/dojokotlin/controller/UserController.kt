@@ -1,21 +1,26 @@
 package io.arcotech.dojokotlin.controller
 
+import io.arcotech.dojokotlin.model.User
+import io.arcotech.dojokotlin.service.UserService
 import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
-import org.springframework.web.bind.annotation.PathVariable
 
 @RestController
 @RequestMapping("/users")
-class UserController {
+class UserController(
+  private val userService: UserService
+) {
 
   @GetMapping("/{id}")
-  fun GetUser(@PathVariable("id") userId: Int): String {
-    return "test get userid: $userId"
+  fun getUser(@PathVariable("id") userId: Long): User {
+    println("test get userid: $userId")
+    return this.userService.getUserById(userId)
   }
 
   @GetMapping
-  fun IndexUser(): String {
+  fun indexUser(): String {
     return "test"
   }
 }
