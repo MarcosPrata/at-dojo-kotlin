@@ -1,21 +1,27 @@
 package io.arcotech.dojokotlin.model
 
+import jakarta.persistence.Column
+import jakarta.persistence.Entity
+import jakarta.persistence.GeneratedValue
+import jakarta.persistence.GenerationType
+import jakarta.persistence.Id
+import org.springframework.data.annotation.CreatedDate
+import org.springframework.data.annotation.LastModifiedDate
 import java.time.LocalDateTime
 
-//class io.arcotech.dojokotlin.model.User {
-//  var id: Long? = null
-//  var username: String = ""
-//  var email: String = ""
-//  var name: String = ""
-//  var createdAt: LocalDateTime = LocalDateTime.now()
-//  var updatedAt: LocalDateTime
-//}
-
+@Entity(name = "users")
 class User(
+    @Column
     val username: String,
+    @Column
     val email: String,
+    @Column
     val name: String,
+    @CreatedDate
     val createdAt: LocalDateTime? = LocalDateTime.now(),
+    @LastModifiedDate
     val updatedAt: LocalDateTime? = LocalDateTime.now(),
-    val id: Long? = null
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    val id: Long? = 0
 )

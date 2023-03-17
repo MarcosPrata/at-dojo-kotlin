@@ -14,13 +14,19 @@ class UserController(
 ) {
 
   @GetMapping("/{id}")
-  fun getUser(@PathVariable("id") userId: Long): User {
+  fun show(@PathVariable("id") userId: Long): User {
     println("test get userid: $userId")
-    return this.userService.getUserById(userId)
+    return this.userService.getById(userId)
   }
 
   @GetMapping
-  fun indexUser(): String {
-    return "test"
+  fun index(): List<User> {
+    return userService.index()
+  }
+
+  @GetMapping("/create")
+  // @PostMapping
+  fun create(): User {
+    return userService.create("ferronato", "ferronato@arcotec", "Lucas Ferronato")
   }
 }
